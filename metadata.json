@@ -1,0 +1,8 @@
+{
+  "name": "Dias Reels Terminator",
+  "description": "Reels Terminator course landing page",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
