@@ -7,7 +7,7 @@ import { Testimonials } from './components/testimonials'
 import { ModulesSection } from './components/modules-section'
 import { BonusesSection } from './components/bonuses-section'
 
-const heroImg = '/hero-creator.webp'
+const heroImg = '/author-photo.webp'
 
 const KASPI_URL = 'https://pay.kaspi.kz/pay/gnbxjkqt'
 const WHATSAPP_URL = 'https://wa.me/77086908909'
@@ -120,8 +120,8 @@ export default function App() {
               src={heroImg}
               onError={(e) => {
                 const target = e.currentTarget
-                if (target.src !== window.location.origin + '/hero-creator.webp') {
-                  target.src = '/hero-creator.webp'
+                if (target.src !== window.location.origin + '/images/author-photo.webp') {
+                  target.src = '/images/author-photo.webp'
                 }
               }}
               alt="REELS TERMINATOR курсының авторы рилс жазып жатыр"
