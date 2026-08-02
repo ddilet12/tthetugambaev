@@ -91,7 +91,7 @@ export function Testimonials() {
             }
           }}
           alt={current.title}
-          className="size-full object-contain bg-zinc-950/80 transition-transform duration-300 group-hover:scale-[1.02]"
+          className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           draggable={false}
         />
 
@@ -169,9 +169,14 @@ export function Testimonials() {
           </button>
           <img
             src={selectedImg}
+            onError={(e) => {
+              const target = e.currentTarget
+              if (current.fallbackSrc && target.src !== window.location.origin + current.fallbackSrc) {
+                target.src = current.fallbackSrc
+              }
+            }}
             alt="Үлкейтілген фото"
             className="max-h-[90vh] max-w-full rounded-2xl object-contain shadow-2xl"
-            referrerPolicy="no-referrer"
           />
         </div>
       )}
