@@ -2,10 +2,6 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ChevronDown, BookOpen, Gift, Sparkles, CheckCircle2 } from 'lucide-react'
 
-import filmingImg from '../assets/modules/filming.webp'
-import editingImg from '../assets/modules/editing.webp'
-import growthImg from '../assets/modules/growth.webp'
-
 type Lesson = {
   code: string
   text: string
@@ -28,8 +24,8 @@ const modulesData: ModuleData[] = [
     badge: 'Модуль 1',
     title: 'Дайындық & Сенімділік',
     subtitle: 'Рилс бастауға дайындық және қорқынышты жеңу',
-    image: filmingImg,
-    fallbackImage: '/modules/filming.webp',
+    image: '/modules/filming.webp',
+    fallbackImage: '/images/modules/filming.webp',
     lessons: [
       {
         code: '0.1',
@@ -50,8 +46,8 @@ const modulesData: ModuleData[] = [
     badge: 'Модуль 2',
     title: 'Идея, Сценарий & Контент',
     subtitle: 'Ататын рилстарға идея табу және сторителл жазу',
-    image: editingImg,
-    fallbackImage: '/modules/editing.webp',
+    image: '/modules/editing.webp',
+    fallbackImage: '/images/modules/editing.webp',
     lessons: [
       {
         code: '0.1',
@@ -92,8 +88,8 @@ const modulesData: ModuleData[] = [
     badge: 'Модуль 3',
     title: 'Түсірілім & Монтаж',
     subtitle: 'Әдемі ракурс, жеңіл сьемка және кәсіби монтаж',
-    image: growthImg,
-    fallbackImage: '/modules/growth.webp',
+    image: '/modules/growth.webp',
+    fallbackImage: '/images/modules/growth.webp',
     lessons: [
       {
         code: '0.1',

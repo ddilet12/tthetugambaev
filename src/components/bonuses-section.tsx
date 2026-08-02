@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Eye, X } from 'lucide-react'
-import bonusImg from '../assets/bonus-image.webp'
+
+const bonusImg = '/bonus-image.webp'
 
 export function BonusesSection() {
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null)

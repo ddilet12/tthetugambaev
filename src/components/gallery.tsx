@@ -1,14 +1,6 @@
 import { useState, useRef, type TouchEvent } from 'react'
 import { ChevronLeft, ChevronRight, Eye, Grid, Maximize2, X } from 'lucide-react'
 
-import work1 from '../assets/portfolio/work-1.webp'
-import work2 from '../assets/portfolio/work-2.webp'
-import work3 from '../assets/portfolio/work-3.webp'
-import work4 from '../assets/portfolio/work-4.webp'
-import work5 from '../assets/portfolio/work-5.webp'
-import work6 from '../assets/portfolio/work-6.webp'
-import work7 from '../assets/portfolio/work-7.webp'
-
 type Slide = {
   src: string
   fallbackSrc: string
@@ -18,13 +10,13 @@ type Slide = {
 }
 
 const slides: Slide[] = [
-  { src: work6, fallbackSrc: '/portfolio/work-6.webp', alt: 'Диас Тугамбаев - Рилс продюсер', label: 'Диас Тугамбаев', category: 'Кейс' },
-  { src: work1, fallbackSrc: '/portfolio/work-1.webp', alt: 'Визуалды контент жасау', label: 'Рилс түсірілімі', category: 'Видео съемка' },
-  { src: work2, fallbackSrc: '/portfolio/work-2.webp', alt: 'Кәсіби монтаж және эффектілер', label: 'Монтаж & Бояу', category: 'Монтаж' },
-  { src: work3, fallbackSrc: '/portfolio/work-3.webp', alt: 'Проекттік контент жұмысы', label: 'Контент проект', category: 'Сценарий' },
-  { src: work4, fallbackSrc: '/portfolio/work-4.webp', alt: 'Сторителл және динамика', label: 'Динамикалық рилс', category: 'Сторителл' },
-  { src: work5, fallbackSrc: '/portfolio/work-5.webp', alt: 'Түс коррекциясы және субтитр', label: 'Өтімді рилс', category: 'Оформление' },
-  { src: work7, fallbackSrc: '/portfolio/work-7.webp', alt: 'Мобильді съемка процессоры', label: 'Мобилография', category: 'Мобильдік' },
+  { src: '/portfolio/work-6.webp', fallbackSrc: '/images/portfolio/work-6.webp', alt: 'Диас Тугамбаев - Рилс продюсер', label: 'Диас Тугамбаев', category: 'Кейс' },
+  { src: '/portfolio/work-1.webp', fallbackSrc: '/images/portfolio/work-1.webp', alt: 'Визуалды контент жасау', label: 'Рилс түсірілімі', category: 'Видео съемка' },
+  { src: '/portfolio/work-2.webp', fallbackSrc: '/images/portfolio/work-2.webp', alt: 'Кәсіби монтаж және эффектілер', label: 'Монтаж & Бояу', category: 'Монтаж' },
+  { src: '/portfolio/work-3.webp', fallbackSrc: '/images/portfolio/work-3.webp', alt: 'Проекттік контент жұмысы', label: 'Контент проект', category: 'Сценарий' },
+  { src: '/portfolio/work-4.webp', fallbackSrc: '/images/portfolio/work-4.webp', alt: 'Сторителл және динамика', label: 'Динамикалық рилс', category: 'Сторителл' },
+  { src: '/portfolio/work-5.webp', fallbackSrc: '/images/portfolio/work-5.webp', alt: 'Түс коррекциясы және субтитр', label: 'Өтімді рилс', category: 'Оформление' },
+  { src: '/portfolio/work-7.webp', fallbackSrc: '/images/portfolio/work-7.webp', alt: 'Мобильді съемка процессоры', label: 'Мобилография', category: 'Мобильдік' },
 ]
 
 export function Gallery() {

@@ -1,11 +1,6 @@
 import { useState, useRef, type TouchEvent } from 'react'
 import { ChevronLeft, ChevronRight, Eye, X } from 'lucide-react'
 
-import review1 from '../assets/testimonials/review-1.webp'
-import review2 from '../assets/testimonials/review-2.webp'
-import review3 from '../assets/testimonials/review-3.webp'
-import review4 from '../assets/testimonials/review-4.webp'
-
 type TestimonialSlide = {
   id: number
   src: string
@@ -17,29 +12,29 @@ type TestimonialSlide = {
 const testimonials: TestimonialSlide[] = [
   {
     id: 1,
-    src: review1,
-    fallbackSrc: '/testimonials/review-1.webp',
+    src: '/testimonials/review-1.webp',
+    fallbackSrc: '/images/testimonials/review-1.webp',
     title: 'Оқушының пікірі & нәтижесі',
     badge: 'Нәтиже #1',
   },
   {
     id: 2,
-    src: review2,
-    fallbackSrc: '/testimonials/review-2.webp',
+    src: '/testimonials/review-2.webp',
+    fallbackSrc: '/images/testimonials/review-2.webp',
     title: 'Рилс қаралымы мен отзыв',
     badge: 'Нәтиже #2',
   },
   {
     id: 3,
-    src: review3,
-    fallbackSrc: '/testimonials/review-3.webp',
+    src: '/testimonials/review-3.webp',
+    fallbackSrc: '/images/testimonials/review-3.webp',
     title: 'Статистика мен кері байланыс',
     badge: 'Нәтиже #3',
   },
   {
     id: 4,
-    src: review4,
-    fallbackSrc: '/testimonials/review-4.webp',
+    src: '/testimonials/review-4.webp',
+    fallbackSrc: '/images/testimonials/review-4.webp',
     title: 'Оқушының чаттағы пікірі',
     badge: 'Нәтиже #4',
   },

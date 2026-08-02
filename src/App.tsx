@@ -6,7 +6,8 @@ import { Gallery } from './components/gallery'
 import { Testimonials } from './components/testimonials'
 import { ModulesSection } from './components/modules-section'
 import { BonusesSection } from './components/bonuses-section'
-import heroImg from './assets/hero-creator.webp'
+
+const heroImg = '/hero-creator.webp'
 
 const KASPI_URL = 'https://pay.kaspi.kz/pay/gnbxjkqt'
 const WHATSAPP_URL = 'https://wa.me/77086908909'
