@@ -11,19 +11,20 @@ import work7 from '../assets/portfolio/work-7.webp'
 
 type Slide = {
   src: string
+  fallbackSrc: string
   alt: string
   label: string
   category: string
 }
 
 const slides: Slide[] = [
-  { src: work6, alt: 'Диас Тугамбаев - Рилс продюсер', label: 'Диас Тугамбаев', category: 'Кейс' },
-  { src: work1, alt: 'Визуалды контент жасау', label: 'Рилс түсірілімі', category: 'Видео съемка' },
-  { src: work2, alt: 'Кәсіби монтаж және эффектілер', label: 'Монтаж & Бояу', category: 'Монтаж' },
-  { src: work3, alt: 'Проекттік контент жұмысы', label: 'Контент проект', category: 'Сценарий' },
-  { src: work4, alt: 'Сторителл және динамика', label: 'Динамикалық рилс', category: 'Сторителл' },
-  { src: work5, alt: 'Түс коррекциясы және субтитр', label: 'Өтімді рилс', category: 'Оформление' },
-  { src: work7, alt: 'Мобильді съемка процессоры', label: 'Мобилография', category: 'Мобильдік' },
+  { src: work6, fallbackSrc: '/portfolio/work-6.webp', alt: 'Диас Тугамбаев - Рилс продюсер', label: 'Диас Тугамбаев', category: 'Кейс' },
+  { src: work1, fallbackSrc: '/portfolio/work-1.webp', alt: 'Визуалды контент жасау', label: 'Рилс түсірілімі', category: 'Видео съемка' },
+  { src: work2, fallbackSrc: '/portfolio/work-2.webp', alt: 'Кәсіби монтаж және эффектілер', label: 'Монтаж & Бояу', category: 'Монтаж' },
+  { src: work3, fallbackSrc: '/portfolio/work-3.webp', alt: 'Проекттік контент жұмысы', label: 'Контент проект', category: 'Сценарий' },
+  { src: work4, fallbackSrc: '/portfolio/work-4.webp', alt: 'Сторителл және динамика', label: 'Динамикалық рилс', category: 'Сторителл' },
+  { src: work5, fallbackSrc: '/portfolio/work-5.webp', alt: 'Түс коррекциясы және субтитр', label: 'Өтімді рилс', category: 'Оформление' },
+  { src: work7, fallbackSrc: '/portfolio/work-7.webp', alt: 'Мобильді съемка процессоры', label: 'Мобилография', category: 'Мобильдік' },
 ]
 
 export function Gallery() {
@@ -102,10 +103,15 @@ export function Gallery() {
           >
             <img
               src={current.src}
+              onError={(e) => {
+                const target = e.currentTarget
+                if (current.fallbackSrc && target.src !== window.location.origin + current.fallbackSrc) {
+                  target.src = current.fallbackSrc
+                }
+              }}
               alt={current.alt}
               onClick={() => setFullscreenImage(current.src)}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 cursor-pointer"
-              referrerPolicy="no-referrer"
             />
 
             {/* Eye Zoom Button */}
@@ -162,9 +168,14 @@ export function Gallery() {
             >
               <img
                 src={s.src}
+                onError={(e) => {
+                  const target = e.currentTarget
+                  if (s.fallbackSrc && target.src !== window.location.origin + s.fallbackSrc) {
+                    target.src = s.fallbackSrc
+                  }
+                }}
                 alt={s.alt}
                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
-                referrerPolicy="no-referrer"
               />
             </div>
           ))}

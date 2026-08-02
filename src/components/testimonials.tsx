@@ -9,6 +9,7 @@ import review4 from '../assets/testimonials/review-4.webp'
 type TestimonialSlide = {
   id: number
   src: string
+  fallbackSrc: string
   title: string
   badge: string
 }
@@ -17,24 +18,28 @@ const testimonials: TestimonialSlide[] = [
   {
     id: 1,
     src: review1,
+    fallbackSrc: '/testimonials/review-1.webp',
     title: 'Оқушының пікірі & нәтижесі',
     badge: 'Нәтиже #1',
   },
   {
     id: 2,
     src: review2,
+    fallbackSrc: '/testimonials/review-2.webp',
     title: 'Рилс қаралымы мен отзыв',
     badge: 'Нәтиже #2',
   },
   {
     id: 3,
     src: review3,
+    fallbackSrc: '/testimonials/review-3.webp',
     title: 'Статистика мен кері байланыс',
     badge: 'Нәтиже #3',
   },
   {
     id: 4,
     src: review4,
+    fallbackSrc: '/testimonials/review-4.webp',
     title: 'Оқушының чаттағы пікірі',
     badge: 'Нәтиже #4',
   },
@@ -84,10 +89,15 @@ export function Testimonials() {
       >
         <img
           src={current.src}
+          onError={(e) => {
+            const target = e.currentTarget
+            if (current.fallbackSrc && target.src !== window.location.origin + current.fallbackSrc) {
+              target.src = current.fallbackSrc
+            }
+          }}
           alt={current.title}
           className="size-full object-contain bg-zinc-950/80 transition-transform duration-300 group-hover:scale-[1.02]"
           draggable={false}
-          referrerPolicy="no-referrer"
         />
 
         {/* Badge */}

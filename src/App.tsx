@@ -117,9 +117,16 @@ export default function App() {
           <div className="overflow-hidden rounded-[2rem] border-4 border-white/10 shadow-2xl">
             <img
               src={heroImg}
+              onError={(e) => {
+                const target = e.currentTarget
+                if (target.src !== window.location.origin + '/hero-creator.webp') {
+                  target.src = '/hero-creator.webp'
+                }
+              }}
               alt="REELS TERMINATOR курсының авторы рилс жазып жатыр"
               className="aspect-[3/4] w-full object-cover"
-              referrerPolicy="no-referrer"
+              loading="eager"
+              decoding="async"
             />
           </div>
         </motion.div>

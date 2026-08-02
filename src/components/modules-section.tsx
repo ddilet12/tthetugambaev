@@ -17,6 +17,7 @@ type ModuleData = {
   title: string
   subtitle: string
   image?: string
+  fallbackImage?: string
   lessons: Lesson[]
   bonus?: string
 }
@@ -28,6 +29,7 @@ const modulesData: ModuleData[] = [
     title: 'Дайындық & Сенімділік',
     subtitle: 'Рилс бастауға дайындық және қорқынышты жеңу',
     image: filmingImg,
+    fallbackImage: '/modules/filming.webp',
     lessons: [
       {
         code: '0.1',
@@ -49,6 +51,7 @@ const modulesData: ModuleData[] = [
     title: 'Идея, Сценарий & Контент',
     subtitle: 'Ататын рилстарға идея табу және сторителл жазу',
     image: editingImg,
+    fallbackImage: '/modules/editing.webp',
     lessons: [
       {
         code: '0.1',
@@ -90,6 +93,7 @@ const modulesData: ModuleData[] = [
     title: 'Түсірілім & Монтаж',
     subtitle: 'Әдемі ракурс, жеңіл сьемка және кәсіби монтаж',
     image: growthImg,
+    fallbackImage: '/modules/growth.webp',
     lessons: [
       {
         code: '0.1',
@@ -189,7 +193,17 @@ export function ModulesSection() {
                 <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                   {mod.image && (
                     <div className="hidden xs:block shrink-0 size-12 sm:size-14 rounded-xl overflow-hidden border border-white/10 bg-zinc-900 shadow-md">
-                      <img src={mod.image} alt={mod.title} className="h-full w-full object-cover" referrerPolicy="no-referrer" />
+                      <img
+                        src={mod.image}
+                        onError={(e) => {
+                          const target = e.currentTarget
+                          if (mod.fallbackImage && target.src !== window.location.origin + mod.fallbackImage) {
+                            target.src = mod.fallbackImage
+                          }
+                        }}
+                        alt={mod.title}
+                        className="h-full w-full object-cover"
+                      />
                     </div>
                   )}
                   <span className="shrink-0 inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/10 px-2.5 py-1 text-xs font-extrabold uppercase tracking-widest text-white shadow-sm">
