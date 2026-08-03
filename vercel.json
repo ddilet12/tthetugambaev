@@ -3,6 +3,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/((?!assets/|portfolio/|testimonials/|modules/|images/|.*\\.(?:js|css|webp|jpg|jpeg|png|gif|svg|ico|json|woff2?|ttf|eot)).*)",
+      "destination": "/index.html"
+    }
   ]
 }

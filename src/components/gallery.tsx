@@ -8,6 +8,7 @@ import img1057 from '../assets/portfolio/IMG_1057.JPG.webp'
 import img1058 from '../assets/portfolio/IMG_1058.JPG.webp'
 import img1059 from '../assets/portfolio/IMG_1059.JPG.webp'
 import img1060 from '../assets/portfolio/IMG_1060.JPG.webp'
+import img1063 from '../assets/portfolio/IMG_1063.webp'
 import img1067 from '../assets/portfolio/IMG_1067.webp'
 import img1068 from '../assets/portfolio/IMG_1068.JPG.webp'
 
@@ -25,6 +26,7 @@ const slides: Slide[] = [
   { src: img1060, alt: 'Кәсіби монтаж және эффектілер', label: 'Монтаж & Бояу', category: 'Монтаж' },
   { src: img1056, alt: 'Креативті видео концепт', label: 'Креатив Видео', category: 'Концепт' },
   { src: img1057, alt: 'Контент стратегиясы және визуал', label: 'Визуал Стратегия', category: 'Стратегия' },
+  { src: img1063, alt: 'Рилс воронкасы және контент', label: 'Рилс Воронка', category: 'Контент' },
   { src: work1, alt: 'Өтімді рилс субтитр', label: 'Өтімді рилс', category: 'Оформление' },
   { src: img1058, alt: 'Мобильді съемка процессоры', label: 'Мобилография', category: 'Мобильдік' },
 ]
