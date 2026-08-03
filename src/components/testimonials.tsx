@@ -1,10 +1,14 @@
 import { useState, useRef, type TouchEvent } from 'react'
 import { ChevronLeft, ChevronRight, Eye, X } from 'lucide-react'
 
+import review1 from '../assets/testimonials/review-1.webp'
+import review2 from '../assets/testimonials/review-2.webp'
+import review3 from '../assets/testimonials/review-3.webp'
+import review4 from '../assets/testimonials/review-4.webp'
+
 type TestimonialSlide = {
   id: number
   src: string
-  fallbackSrc: string
   title: string
   badge: string
 }
@@ -12,29 +16,25 @@ type TestimonialSlide = {
 const testimonials: TestimonialSlide[] = [
   {
     id: 1,
-    src: '/testimonials/review-1.webp',
-    fallbackSrc: '/images/testimonials/review-1.webp',
+    src: review1,
     title: 'Оқушының пікірі & нәтижесі',
     badge: 'Нәтиже #1',
   },
   {
     id: 2,
-    src: '/testimonials/review-2.webp',
-    fallbackSrc: '/images/testimonials/review-2.webp',
+    src: review2,
     title: 'Рилс қаралымы мен отзыв',
     badge: 'Нәтиже #2',
   },
   {
     id: 3,
-    src: '/testimonials/review-3.webp',
-    fallbackSrc: '/images/testimonials/review-3.webp',
+    src: review3,
     title: 'Статистика мен кері байланыс',
     badge: 'Нәтиже #3',
   },
   {
     id: 4,
-    src: '/testimonials/review-4.webp',
-    fallbackSrc: '/images/testimonials/review-4.webp',
+    src: review4,
     title: 'Оқушының чаттағы пікірі',
     badge: 'Нәтиже #4',
   },
@@ -84,12 +84,6 @@ export function Testimonials() {
       >
         <img
           src={current.src}
-          onError={(e) => {
-            const target = e.currentTarget
-            if (current.fallbackSrc && target.src !== window.location.origin + current.fallbackSrc) {
-              target.src = current.fallbackSrc
-            }
-          }}
           alt={current.title}
           className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           draggable={false}
@@ -169,12 +163,6 @@ export function Testimonials() {
           </button>
           <img
             src={selectedImg}
-            onError={(e) => {
-              const target = e.currentTarget
-              if (current.fallbackSrc && target.src !== window.location.origin + current.fallbackSrc) {
-                target.src = current.fallbackSrc
-              }
-            }}
             alt="Үлкейтілген фото"
             className="max-h-[90vh] max-w-full rounded-2xl object-contain shadow-2xl"
           />

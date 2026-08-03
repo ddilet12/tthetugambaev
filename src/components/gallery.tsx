@@ -1,22 +1,30 @@
 import { useState, useRef, type TouchEvent } from 'react'
 import { ChevronLeft, ChevronRight, Eye, Grid, Maximize2, X } from 'lucide-react'
 
+import work1 from '../assets/portfolio/work-1.webp'
+import work2 from '../assets/portfolio/work-2.webp'
+
+import img1059 from '../assets/portfolio/IMG_1059.JPG.webp'
+import img1060 from '../assets/portfolio/IMG_1060.JPG.webp'
+import img1063 from '../assets/portfolio/IMG_1063.webp'
+import img1067 from '../assets/portfolio/IMG_1067.webp'
+import img1068 from '../assets/portfolio/IMG_1068.JPG.webp'
+
 type Slide = {
   src: string
-  fallbackSrc: string
   alt: string
   label: string
   category: string
 }
 
 const slides: Slide[] = [
-  { src: '/portfolio/work-6.webp', fallbackSrc: '/images/portfolio/work-6.webp', alt: 'Диас Тугамбаев - Рилс продюсер', label: 'Диас Тугамбаев', category: 'Кейс' },
-  { src: '/portfolio/work-1.webp', fallbackSrc: '/images/portfolio/work-1.webp', alt: 'Визуалды контент жасау', label: 'Рилс түсірілімі', category: 'Видео съемка' },
-  { src: '/portfolio/work-2.webp', fallbackSrc: '/images/portfolio/work-2.webp', alt: 'Кәсіби монтаж және эффектілер', label: 'Монтаж & Бояу', category: 'Монтаж' },
-  { src: '/portfolio/work-3.webp', fallbackSrc: '/images/portfolio/work-3.webp', alt: 'Проекттік контент жұмысы', label: 'Контент проект', category: 'Сценарий' },
-  { src: '/portfolio/work-4.webp', fallbackSrc: '/images/portfolio/work-4.webp', alt: 'Сторителл және динамика', label: 'Динамикалық рилс', category: 'Сторителл' },
-  { src: '/portfolio/work-5.webp', fallbackSrc: '/images/portfolio/work-5.webp', alt: 'Түс коррекциясы және субтитр', label: 'Өтімді рилс', category: 'Оформление' },
-  { src: '/portfolio/work-7.webp', fallbackSrc: '/images/portfolio/work-7.webp', alt: 'Мобильді съемка процессоры', label: 'Мобилография', category: 'Мобильдік' },
+  { src: img1068, alt: 'Диас Тугамбаев - Рилс продюсер портфолиосы', label: 'Диас Тугамбаев', category: 'Кейс' },
+  { src: img1059, alt: 'Визуалды контент жасау', label: 'Рилс түсірілімі', category: 'Видео съемка' },
+  { src: img1060, alt: 'Кәсіби монтаж және эффектілер', label: 'Монтаж & Бояу', category: 'Монтаж' },
+  { src: img1063, alt: 'Проекттік контент жұмысы', label: 'Контент проект', category: 'Сценарий' },
+  { src: img1067, alt: 'Сторителл және динамика', label: 'Динамикалық рилс', category: 'Сторителл' },
+  { src: work1, alt: 'Өтімді рилс субтитр', label: 'Өтімді рилс', category: 'Оформление' },
+  { src: work2, alt: 'Мобильді съемка процессоры', label: 'Мобилография', category: 'Мобильдік' },
 ]
 
 export function Gallery() {
@@ -95,12 +103,6 @@ export function Gallery() {
           >
             <img
               src={current.src}
-              onError={(e) => {
-                const target = e.currentTarget
-                if (current.fallbackSrc && target.src !== window.location.origin + current.fallbackSrc) {
-                  target.src = current.fallbackSrc
-                }
-              }}
               alt={current.alt}
               onClick={() => setFullscreenImage(current.src)}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 cursor-pointer"
@@ -160,12 +162,6 @@ export function Gallery() {
             >
               <img
                 src={s.src}
-                onError={(e) => {
-                  const target = e.currentTarget
-                  if (s.fallbackSrc && target.src !== window.location.origin + s.fallbackSrc) {
-                    target.src = s.fallbackSrc
-                  }
-                }}
                 alt={s.alt}
                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
               />

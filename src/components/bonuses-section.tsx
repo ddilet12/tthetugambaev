@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Eye, X } from 'lucide-react'
 
-const bonusImg = '/bonus-image.webp'
+import bonusImg from '../assets/bonus-image.webp'
 
 export function BonusesSection() {
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null)
@@ -12,12 +12,6 @@ export function BonusesSection() {
       <div className="group relative w-full max-w-2xl overflow-hidden rounded-3xl border border-white/15 bg-zinc-950 shadow-2xl">
         <img
           src={bonusImg}
-          onError={(e) => {
-            const target = e.currentTarget
-            if (target.src !== window.location.origin + '/bonus-image.webp') {
-              target.src = '/bonus-image.webp'
-            }
-          }}
           alt="Бонустар фотосы"
           className="w-full h-auto object-cover cursor-pointer transition-transform duration-500 group-hover:scale-[1.02]"
           onClick={() => setFullscreenImage(bonusImg)}
@@ -50,7 +44,6 @@ export function BonusesSection() {
             src={fullscreenImage}
             alt="Бонустар фотосы"
             className="max-h-[90vh] max-w-[95vw] rounded-2xl object-contain border border-white/10 shadow-2xl"
-            referrerPolicy="no-referrer"
           />
         </div>
       )}

@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ChevronDown, BookOpen, Gift, Sparkles, CheckCircle2 } from 'lucide-react'
 
+import filmingImg from '../assets/modules/filming.webp'
+import editingImg from '../assets/modules/editing.webp'
+import growthImg from '../assets/modules/growth.webp'
+
 type Lesson = {
   code: string
   text: string
@@ -13,7 +17,6 @@ type ModuleData = {
   title: string
   subtitle: string
   image?: string
-  fallbackImage?: string
   lessons: Lesson[]
   bonus?: string
 }
@@ -24,8 +27,7 @@ const modulesData: ModuleData[] = [
     badge: 'Модуль 1',
     title: 'Дайындық & Сенімділік',
     subtitle: 'Рилс бастауға дайындық және қорқынышты жеңу',
-    image: '/modules/filming.webp',
-    fallbackImage: '/images/modules/filming.webp',
+    image: filmingImg,
     lessons: [
       {
         code: '0.1',
@@ -46,8 +48,7 @@ const modulesData: ModuleData[] = [
     badge: 'Модуль 2',
     title: 'Идея, Сценарий & Контент',
     subtitle: 'Ататын рилстарға идея табу және сторителл жазу',
-    image: '/modules/editing.webp',
-    fallbackImage: '/images/modules/editing.webp',
+    image: editingImg,
     lessons: [
       {
         code: '0.1',
@@ -88,8 +89,7 @@ const modulesData: ModuleData[] = [
     badge: 'Модуль 3',
     title: 'Түсірілім & Монтаж',
     subtitle: 'Әдемі ракурс, жеңіл сьемка және кәсіби монтаж',
-    image: '/modules/growth.webp',
-    fallbackImage: '/images/modules/growth.webp',
+    image: growthImg,
     lessons: [
       {
         code: '0.1',
@@ -191,12 +191,6 @@ export function ModulesSection() {
                     <div className="hidden xs:block shrink-0 size-12 sm:size-14 rounded-xl overflow-hidden border border-white/10 bg-zinc-900 shadow-md">
                       <img
                         src={mod.image}
-                        onError={(e) => {
-                          const target = e.currentTarget
-                          if (mod.fallbackImage && target.src !== window.location.origin + mod.fallbackImage) {
-                            target.src = mod.fallbackImage
-                          }
-                        }}
                         alt={mod.title}
                         className="h-full w-full object-cover"
                       />
