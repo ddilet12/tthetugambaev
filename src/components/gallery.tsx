@@ -2,11 +2,12 @@ import { useState, useRef, type TouchEvent } from 'react'
 import { ChevronLeft, ChevronRight, Eye, Grid, Maximize2, X } from 'lucide-react'
 
 import work1 from '../assets/portfolio/work-1.webp'
-import work2 from '../assets/portfolio/work-2.webp'
 
+import img1056 from '../assets/portfolio/IMG_1056.JPG.webp'
+import img1057 from '../assets/portfolio/IMG_1057.JPG.webp'
+import img1058 from '../assets/portfolio/IMG_1058.JPG.webp'
 import img1059 from '../assets/portfolio/IMG_1059.JPG.webp'
 import img1060 from '../assets/portfolio/IMG_1060.JPG.webp'
-import img1063 from '../assets/portfolio/IMG_1063.webp'
 import img1067 from '../assets/portfolio/IMG_1067.webp'
 import img1068 from '../assets/portfolio/IMG_1068.JPG.webp'
 
@@ -19,12 +20,13 @@ type Slide = {
 
 const slides: Slide[] = [
   { src: img1068, alt: 'Диас Тугамбаев - Рилс продюсер портфолиосы', label: 'Диас Тугамбаев', category: 'Кейс' },
+  { src: img1067, alt: 'Сторителл және динамика', label: 'Динамикалық рилс', category: 'Сторителл' },
   { src: img1059, alt: 'Визуалды контент жасау', label: 'Рилс түсірілімі', category: 'Видео съемка' },
   { src: img1060, alt: 'Кәсіби монтаж және эффектілер', label: 'Монтаж & Бояу', category: 'Монтаж' },
-  { src: img1063, alt: 'Проекттік контент жұмысы', label: 'Контент проект', category: 'Сценарий' },
-  { src: img1067, alt: 'Сторителл және динамика', label: 'Динамикалық рилс', category: 'Сторителл' },
+  { src: img1056, alt: 'Креативті видео концепт', label: 'Креатив Видео', category: 'Концепт' },
+  { src: img1057, alt: 'Контент стратегиясы және визуал', label: 'Визуал Стратегия', category: 'Стратегия' },
   { src: work1, alt: 'Өтімді рилс субтитр', label: 'Өтімді рилс', category: 'Оформление' },
-  { src: work2, alt: 'Мобильді съемка процессоры', label: 'Мобилография', category: 'Мобильдік' },
+  { src: img1058, alt: 'Мобильді съемка процессоры', label: 'Мобилография', category: 'Мобильдік' },
 ]
 
 export function Gallery() {
@@ -58,7 +60,7 @@ export function Gallery() {
     touchEndX.current = null
   }
 
-  const current = slides[index]
+  const current = slides[index % slides.length] || slides[0]
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-6 select-none">
