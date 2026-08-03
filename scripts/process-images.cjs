@@ -8,95 +8,78 @@ function ensureDir(dirPath) {
   }
 }
 
+async function processImage(sourceFile, targets, width = null, quality = 85) {
+  if (!fs.existsSync(sourceFile)) {
+    console.log(`[SKIP] Missing source: ${sourceFile}`);
+    return;
+  }
+  
+  let pipeline = sharp(sourceFile);
+  if (width) {
+    pipeline = pipeline.resize({ width, withoutEnlargement: true });
+  }
+  
+  const buffer = await pipeline.webp({ quality }).toBuffer();
+
+  for (const target of targets) {
+    ensureDir(path.dirname(target));
+    fs.writeFileSync(target, buffer);
+    console.log(`  -> Saved: ${target} (${Math.round(buffer.length / 1024)} KB)`);
+  }
+}
+
 async function run() {
-  console.log('Syncing real images...');
+  console.log('=== Syncing & Optimizing Project Images ===\n');
 
-  const dirs = [
-    'public',
-    'public/images',
-    'public/testimonials',
-    'public/images/testimonials',
-    'public/portfolio',
-    'public/images/portfolio',
-    'public/modules',
-    'public/images/modules',
-    'src/assets',
-    'src/assets/testimonials',
-    'src/assets/portfolio',
-    'src/assets/modules'
-  ];
-  dirs.forEach(ensureDir);
+  // 1. Author Photo (Hero & Small)
+  if (fs.existsSync('IMG_9734.JPG (1).webp')) {
+    await processImage('IMG_9734.JPG (1).webp', [
+      'public/author-photo.webp',
+      'public/hero-creator.webp',
+      'public/images/author-photo.webp',
+      'public/images/hero-creator.webp',
+      'src/assets/author-photo.webp',
+      'src/assets/hero-creator.webp'
+    ], 1200, 85);
 
-  // Helper to copy/convert image to multiple destination files
-  async function syncImage(sourceFile, targets) {
-    if (!fs.existsSync(sourceFile)) {
-      console.log(`Skipping missing source: ${sourceFile}`);
-      return;
-    }
-    console.log(`Processing ${sourceFile} -> ${targets.join(', ')}`);
-    const isJpeg = sourceFile.toLowerCase().endsWith('.jpg') || sourceFile.toLowerCase().endsWith('.jpeg');
-    let buffer;
-    if (isJpeg) {
-      buffer = await sharp(sourceFile).webp({ quality: 90 }).toBuffer();
-    } else {
-      buffer = fs.readFileSync(sourceFile);
-    }
-
-    for (const target of targets) {
-      ensureDir(path.dirname(target));
-      fs.writeFileSync(target, buffer);
-    }
+    await processImage('IMG_9734.JPG (1).webp', [
+      'public/author-photo-small.webp',
+      'public/images/author-photo-small.webp'
+    ], 400, 80);
   }
 
-  // 1. Author Hero
-  await syncImage('IMG_9734.JPG (1).webp', [
-    'public/author-photo.webp',
-    'public/hero-creator.webp',
-    'public/images/author-photo.webp',
-    'public/images/hero-creator.webp',
-    'src/assets/author-photo.webp',
-    'src/assets/hero-creator.webp'
-  ]);
-
-  // 2. Bonus Image (IMG_1071 is latest bonus photo)
+  // 2. Bonus Image
   if (fs.existsSync('IMG_1071.JPG (1).jpeg')) {
-    await syncImage('IMG_1071.JPG (1).jpeg', [
+    await processImage('IMG_1071.JPG (1).jpeg', [
       'public/bonus-image.webp',
       'public/images/bonus-image.webp',
       'src/assets/bonus-image.webp'
-    ]);
+    ], 1000, 85);
   } else if (fs.existsSync('IMG_0482.JPG (1).webp')) {
-    await syncImage('IMG_0482.JPG (1).webp', [
+    await processImage('IMG_0482.JPG (1).webp', [
       'public/bonus-image.webp',
       'public/images/bonus-image.webp',
       'src/assets/bonus-image.webp'
-    ]);
+    ], 1000, 85);
   }
 
   // 3. Testimonials
-  await syncImage('IMG_8807 (1).webp', [
-    'public/testimonials/review-1.webp',
-    'public/images/testimonials/review-1.webp',
-    'src/assets/testimonials/review-1.webp'
-  ]);
-  await syncImage('IMG_0747 (1).webp', [
-    'public/testimonials/review-2.webp',
-    'public/images/testimonials/review-2.webp',
-    'src/assets/testimonials/review-2.webp'
-  ]);
-  await syncImage('IMG_0628 (1).webp', [
-    'public/testimonials/review-3.webp',
-    'public/images/testimonials/review-3.webp',
-    'src/assets/testimonials/review-3.webp'
-  ]);
-  await syncImage('IMG_0629 (1).webp', [
-    'public/testimonials/review-4.webp',
-    'public/images/testimonials/review-4.webp',
-    'src/assets/testimonials/review-4.webp'
-  ]);
+  const reviews = [
+    { src: 'IMG_8807 (1).webp', name: 'review-1.webp' },
+    { src: 'IMG_0747 (1).webp', name: 'review-2.webp' },
+    { src: 'IMG_0628 (1).webp', name: 'review-3.webp' },
+    { src: 'IMG_0629 (1).webp', name: 'review-4.webp' }
+  ];
+  for (const r of reviews) {
+    await processImage(r.src, [
+      `public/testimonials/${r.name}`,
+      `public/images/testimonials/${r.name}`,
+      `src/assets/testimonials/${r.name}`
+    ], 800, 85);
+  }
 
   // 4. Portfolio items
-  const portfolioPairs = [
+  const portfolioItems = [
     { src: 'IMG_1056,JPG-1.webp', altSrc: 'IMG_1056.JPG.webp', target: 'IMG_1056.JPG.webp' },
     { src: 'IMG_1057,JPG-1.webp', altSrc: 'IMG_1057.JPG.webp', target: 'IMG_1057.JPG.webp' },
     { src: 'IMG_1058,JPG-1.webp', altSrc: 'IMG_1058.JPG.webp', target: 'IMG_1058.JPG.webp' },
@@ -107,18 +90,18 @@ async function run() {
     { src: 'IMG_1068.JPG.webp', altSrc: null, target: 'IMG_1068.JPG.webp' },
   ];
 
-  for (const pair of portfolioPairs) {
-    const file = fs.existsSync(pair.src) ? pair.src : (pair.altSrc && fs.existsSync(pair.altSrc) ? pair.altSrc : null);
+  for (const p of portfolioItems) {
+    const file = fs.existsSync(p.src) ? p.src : (p.altSrc && fs.existsSync(p.altSrc) ? p.altSrc : null);
     if (file) {
-      await syncImage(file, [
-        `public/portfolio/${pair.target}`,
-        `public/images/portfolio/${pair.target}`,
-        `src/assets/portfolio/${pair.target}`
-      ]);
+      await processImage(file, [
+        `public/portfolio/${p.target}`,
+        `public/images/portfolio/${p.target}`,
+        `src/assets/portfolio/${p.target}`
+      ], 1000, 85);
     }
   }
 
-  console.log('Images sync complete!');
+  console.log('\n=== Image Processing Complete! ===');
 }
 
 run().catch(console.error);
